@@ -1,0 +1,4 @@
+# Configuration Caddy pour le sous-domaine Pokédex
+pokedex.rqrqrqrqrqrqrqrq.space {
+    reverse_proxy localhost:8080
+}
