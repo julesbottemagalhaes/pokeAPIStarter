@@ -4,85 +4,231 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Poke API</title>
+    <title>Pokédex Ultime - Explorez le monde des Pokémon</title>
+    
+    <!-- PWA & Mobile Optimization -->
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <meta name="theme-color" content="#0f1219" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%23ee1515'/%3E%3Cpath d='M2 50 A48 48 0 0 0 98 50 Z' fill='%23f5f5f7'/%3E%3Cpath d='M2 50 L98 50' stroke='%23222' stroke-width='8'/%3E%3Ccircle cx='50' cy='50' r='18' fill='%23222'/%3E%3Ccircle cx='50' cy='50' r='11' fill='%23fff' stroke='%23bbb' stroke-width='2'/%3E%3C/svg%3E" />
+    
+    <!-- Google Fonts: Outfit & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" href="./css/normalize.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <script src="./js/script.js" defer type="module"></script>
   </head>
   <body>
-    <main>
-      <article>
-        <figure>
-          <picture>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Image Bulbizarre" />
-          </picture>
-          <figcaption>
-            <span class="types">Plante</span>
-            <h2>Bulbizarre</h2>
-            <ol>
-              <li>Points de vie : 39</li>
-              <li>Attaque : 52</li>
-              <li>Défense : 43</li>
-              <li>Attaque spécial : 60</li>
-              <li>Vitesse : 65</li>
-            </ol>
-          </figcaption>
-        </figure>
-      </article>
-      <article>
-        <figure>
-          <picture>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Image Bulbizarre" />
-          </picture>
-          <figcaption>
-            <span class="types">Plante</span>
-            <h2>Bulbizarre</h2>
-            <ol>
-              <li>Points de vie : 39</li>
-              <li>Attaque : 52</li>
-              <li>Défense : 43</li>
-              <li>Attaque spécial : 60</li>
-              <li>Vitesse : 65</li>
-            </ol>
-          </figcaption>
-        </figure>
-      </article>
-      <article>
-        <figure>
-          <picture>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Image Bulbizarre" />
-          </picture>
-          <figcaption>
-            <span class="types">Plante</span>
-            <h2>Bulbizarre</h2>
-            <ol>
-              <li>Points de vie : 39</li>
-              <li>Attaque : 52</li>
-              <li>Défense : 43</li>
-              <li>Attaque spécial : 60</li>
-              <li>Vitesse : 65</li>
-            </ol>
-          </figcaption>
-        </figure>
-      </article>
-      <article>
-        <figure>
-          <picture>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Image Bulbizarre" />
-          </picture>
-          <figcaption>
-            <span class="types">Plante</span>
-            <h2>Bulbizarre</h2>
-            <ol>
-              <li>Points de vie : 39</li>
-              <li>Attaque : 52</li>
-              <li>Défense : 43</li>
-              <li>Attaque spécial : 60</li>
-              <li>Vitesse : 65</li>
-            </ol>
-          </figcaption>
-        </figure>
-      </article>
+    <!-- Ambient background glows -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+
+    <header class="app-header">
+      <div class="header-top">
+        <div class="brand">
+          <div class="pokeball-icon" title="Attrapez-les tous !">
+            <div class="pokeball-top"></div>
+            <div class="pokeball-center">
+              <div class="pokeball-button"></div>
+            </div>
+            <div class="pokeball-bottom"></div>
+          </div>
+          <div class="brand-text">
+            <h1 class="logo-title">POKÉDEX <span>ULTIME</span></h1>
+            <p class="logo-subtitle">Explorez, évoluez & combattez</p>
+          </div>
+        </div>
+
+        <!-- Controls: Gen, Lang, Sound, Random, Team -->
+        <div class="header-actions">
+          <section id="filtre" class="control-group">
+            <label for="select-generation" class="control-label">Génération</label>
+            <div class="select-wrapper">
+              <select id="select-generation">
+                <option value="1">Génération 1 (Kanto)</option>
+                <option value="2">Génération 2 (Johto)</option>
+                <option value="3">Génération 3 (Hoenn)</option>
+                <option value="4">Génération 4 (Sinnoh)</option>
+                <option value="5">Génération 5 (Unys)</option>
+                <option value="6">Génération 6 (Kalos)</option>
+                <option value="7">Génération 7 (Alola)</option>
+                <option value="8">Génération 8 (Galar)</option>
+                <option value="9">Génération 9 (Paldea)</option>
+              </select>
+            </div>
+          </section>
+
+          <div class="select-lang control-group">
+            <label for="select-language" class="control-label">Langue</label>
+            <div class="select-wrapper">
+              <select id="select-language">
+                <option value="fr">🇫🇷 Français</option>
+                <option value="en">🇬🇧 English</option>
+                <option value="jp">🇯🇵 日本語</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="random-btn" class="icon-btn action-pill-btn" aria-label="Pokémon aléatoire" title="Pokémon aléatoire (R)">
+            <span class="btn-emoji">🎲</span>
+            <span class="btn-label">Aléatoire</span>
+          </button>
+
+          <button id="team-toggle-btn" class="icon-btn action-pill-btn team-trigger-btn" aria-label="Mon Équipe Pokémon" title="Voir mon équipe Pokémon">
+            <span class="btn-emoji">🎒</span>
+            <span class="btn-label">Équipe</span>
+            <span id="team-badge" class="badge-pill">0/6</span>
+          </button>
+
+          <button id="sound-toggle" class="icon-btn sound-btn" aria-label="Activer/Désactiver le son" title="Effets sonores (On/Off)">
+            <span class="sound-icon">🔊</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Live Search & Stats bar -->
+      <div class="search-section">
+        <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="search-input" placeholder="Rechercher par nom, numéro (#025), talent, ou type..." autocomplete="off" spellcheck="false" />
+          <button id="search-clear" class="search-clear-btn" aria-label="Effacer la recherche" hidden>&times;</button>
+        </div>
+        <div class="status-counter">
+          <span id="pokemon-count" class="count-badge">151 Pokémon</span>
+        </div>
+      </div>
+
+      <!-- Sorting & Attribute Filter Toolbar -->
+      <div class="filters-toolbar">
+        <div class="sort-wrapper">
+          <label for="select-sort" class="sort-label">
+            <svg class="sort-icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h18M6 12h12m-9 6h6"/>
+            </svg>
+            Trier :
+          </label>
+          <div class="select-wrapper compact-select">
+            <select id="select-sort">
+              <option value="id_asc">🔢 N° Pokédex (1 ➔ 1025)</option>
+              <option value="id_desc">🔢 N° Pokédex (1025 ➔ 1)</option>
+              <option value="name_asc">🔤 Nom (A ➔ Z)</option>
+              <option value="name_desc">🔤 Nom (Z ➔ A)</option>
+              <option value="bst_desc">⚡ Total Stats (BST Max)</option>
+              <option value="bst_asc">⚡ Total Stats (BST Min)</option>
+              <option value="atk_desc">⚔️ Attaque (Max)</option>
+              <option value="def_desc">🛡️ Défense (Max)</option>
+              <option value="vit_desc">💨 Vitesse (Max)</option>
+              <option value="hp_desc">❤️ PV (Max)</option>
+              <option value="weight_desc">⚖️ Poids (Plus lourd)</option>
+              <option value="height_desc">📏 Taille (Plus grand)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Quick Attribute Filter Chips -->
+        <div class="attribute-chips-wrapper" id="attribute-filters">
+          <button class="attr-chip active" data-filter="all">Tous</button>
+          <button class="attr-chip fav-chip" data-filter="favorites">
+            <span>⭐ Favoris</span>
+            <span id="fav-counter" class="attr-count">0</span>
+          </button>
+          <button class="attr-chip" data-filter="evolution">🧬 Évolutifs</button>
+          <button class="attr-chip" data-filter="final">🏆 Stade Final</button>
+          <button class="attr-chip" data-filter="legendary">👑 Légendaires</button>
+          <button class="attr-chip" data-filter="mega">⚡ Méga</button>
+          <button class="attr-chip" data-filter="gmax">💥 Gigamax</button>
+          <button class="attr-chip" data-filter="monotype">Mono-type</button>
+          <button class="attr-chip" data-filter="dualtype">Double-type</button>
+        </div>
+      </div>
+
+      <!-- Type Filter Chips -->
+      <div class="types-filter-container">
+        <div class="types-title-row">
+          <span class="filter-label">Filtrer par type :</span>
+          <button id="reset-types-btn" class="reset-filter-btn">Tous les types</button>
+        </div>
+        <div id="types" class="types-chips-wrapper">
+          <!-- Populated dynamically via TyraDex API -->
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <!-- Pokémon cards injected dynamically -->
     </main>
+
+    <!-- Team Builder Flyout Drawer -->
+    <aside id="team-drawer" class="team-drawer" aria-labelledby="team-drawer-title" hidden>
+      <div class="team-drawer-backdrop" id="team-drawer-backdrop"></div>
+      <div class="team-drawer-panel">
+        <div class="team-drawer-header">
+          <div class="team-title-group">
+            <span class="team-header-ball"></span>
+            <div>
+              <h3 id="team-drawer-title" class="team-panel-title">Mon Équipe Pokémon</h3>
+              <p class="team-panel-subtitle">Composez votre escouade ultime de 6 combattants</p>
+            </div>
+          </div>
+          <div class="team-panel-controls">
+            <button id="clear-team-btn" class="danger-pill-btn" title="Vider l'équipe">🗑️ Vider</button>
+            <button id="close-team-btn" class="drawer-close-btn" aria-label="Fermer le tiroir">&times;</button>
+          </div>
+        </div>
+
+        <div class="team-slots-grid" id="team-slots">
+          <!-- 6 slots injected dynamically -->
+        </div>
+
+        <div class="team-analysis-block" id="team-analysis">
+          <!-- Team stats summary & type synergy / coverage injected dynamically -->
+        </div>
+      </div>
+    </aside>
+
+    <!-- Modal for Detailed View -->
+    <dialog id="pokemon-modal" class="pokemon-dialog" aria-labelledby="modal-pokemon-name" aria-modal="true">
+      <div class="modal-card" id="modal-card">
+        <button class="modal-close-btn" id="modal-close" aria-label="Fermer la fiche">✕</button>
+        
+        <div class="modal-nav-arrows">
+          <button id="modal-prev-btn" class="nav-arrow prev-arrow" aria-label="Pokémon précédent" title="Précédent (Flèche gauche)">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button id="modal-next-btn" class="nav-arrow next-arrow" aria-label="Pokémon suivant" title="Suivant (Flèche droite)">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+        </div>
+
+        <div id="modal-body" class="modal-body">
+          <!-- Injected dynamically on click -->
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+    <footer class="app-footer">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <span class="footer-ball"></span>
+          <p>Pokédex Ultime &bull; Données propulsées par <a href="https://tyradex.app" target="_blank" rel="noopener">TyraDex API</a> &bull; Cris officiels par <a href="https://pokeapi.co" target="_blank" rel="noopener">PokeAPI</a></p>
+        </div>
+        <p class="footer-note">Survolez une carte pour voir ses évolutions en direct &bull; Raccourcis : [R] Aléatoire &bull; [/] Chercher &bull; [Esc] Fermer</p>
+        <button id="back-to-top" class="back-to-top-btn" title="Remonter en haut">↑ Haut de page</button>
+      </div>
+    </footer>
   </body>
 </html>

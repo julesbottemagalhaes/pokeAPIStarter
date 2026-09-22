@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  pokedex:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pokedex-app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - NODE_ENV=production
+    # Configuration optionnelle pour Reverse Proxy Traefik (si utilisé) :
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.pokedex.rule=Host(`pokedex.votre-domaine.com`)"
+    #   - "traefik.http.routers.pokedex.entrypoints=websecure"
+    #   - "traefik.http.routers.pokedex.tls.certresolver=myresolver"
+    #   - "traefik.http.services.pokedex.loadbalancer.server.port=80"
